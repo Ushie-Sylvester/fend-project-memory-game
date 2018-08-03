@@ -29,6 +29,7 @@ function init() {
 
 card= shuffle(icons);
 
+
     // creating the click Event
 function click(card) {
 
@@ -41,7 +42,7 @@ function click(card) {
         // there is an open card
         if(openedCards.length === 1) {
 
-            card.classList.add("open", "show", "disable");
+            card.classList.add("open", "show","animated", "wobble", "disable");
             openedCards.push(this);
         
             // comparing two cards
@@ -49,7 +50,7 @@ function click(card) {
 
         } else {
         //  there is no open cards
-            card.classList.add("open", "show", "disable");
+            card.classList.add("open", "show","animated", "wobble", "disable");
             openedCards.push(this);
         }
         
@@ -62,9 +63,11 @@ function click(card) {
 function compare(currentCard,previousCard) {
     if(currentCard.innerHTML === previousCard.innerHTML) {
 
-        //matched
-        currentCard.classList.add("match");
-        previousCard.classList.add("match");
+        //if the cards matched remove the wobble class and add the rubberband class
+        currentCard.classList.remove("animated" , "wobble");
+        currentCard.classList.add("match","animated" ,"rubberBand");
+        previousCard.classList.remove("animated" , "wobble");
+        previousCard.classList.add("match","animated" ,"rubberBand" );
         
 
         matchedCards.push(currentCard, previousCard);
@@ -76,10 +79,10 @@ function compare(currentCard,previousCard) {
         gameOver();
 
     } else{
-        //wait 500ms then execute this
+        //wait 350ms then execute this
         setTimeout(function(){
-            currentCard.classList.remove("open", "show", "disable");
-            previousCard.classList.remove("open", "show", "disable");
+            currentCard.classList.remove("open", "show","animated", "wobble", "disable");
+            previousCard.classList.remove("open", "show","animated", "wobble", "disable");
             
         }, 350);
 
@@ -91,10 +94,30 @@ function compare(currentCard,previousCard) {
 }
 
 /*
- *  Check if Game is over
+ *  Check if Game is over and Display a congratulatory message
  */
 function gameOver() {
     if (matchedCards.length === icons.length){
+        setTimeout(function() {
+            $('.deck').each(function() {
+                swal({
+                    title: 'Congratulations',
+                    type: 'success',
+                    text: 'You Won the Game!! . You Made ' + moves + 'Moves. You got ' + stars + ' Star(s)', // Time taken is ' + hours + ' Hours ' + min + ' Minutes and ' + sec + ' Seconds',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Play Again',
+                    confirmButtonColor: '#0000FF',
+                    cancelButtonText: 'Close',
+                    cancelButtonColor: '#FF0000'
+                }).then(function() {
+                    location.reload();
+                }, function(dismiss) {
+                    console.log('Yes');
+                });
+
+            });
+        }, 300);
         
     }
 };
@@ -117,15 +140,19 @@ function addMove() {
 * Rating
 */
 const starsContainer = document.querySelector(".stars");
+let stars = 3;
 function rating(){
     switch(moves) {
-        case 15:
+        case 18:
             starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
             <li><i class="fa fa-star"></i></li>`;
+            stars = 2;
+
         break;
 
-        case 20:
+        case 25:
         starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>`;
+        stars = 1;
 
 
     }

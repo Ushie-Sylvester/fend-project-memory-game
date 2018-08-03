@@ -29,8 +29,13 @@ body {
 }
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Hanalei Fill', Modern Antiqua; */
     font-weight: 300;
+    font-family: Monoton;
+    font-size: 4em;
+    color: #691C1C;
+    /* sets a shadow behind the h1 element*/
+    text-shadow: 6px 8px 10px rgba(100, 100, 150, 1);
 }
 
 /*
@@ -110,4 +115,17 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+.stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    color: gold;
+    font-size: 25px;
+}
+
+.restart{
+    color: #02ccba;
+    font-size: 25px;
 }
