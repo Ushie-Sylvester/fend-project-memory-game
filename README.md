@@ -6,7 +6,7 @@ This is a repository containing my Memory Game Project at Udacity
 1. Download or clone the repositoryon your machine.
 2. Open index.html in your browser.
 OR
-Click on this [LINK](https://github.com/Ushie-Sylvester/Ushie-Sylvester.github.io.git/) to see the live version of the game .
+Click on this [LINK](https://github.com/Ushie-Sylvester/fend-project-memory-game.git/) to see the live version of the game .
 
 ## Rules and Regulations :-
 1. You have to match cards with identical face.
