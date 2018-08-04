@@ -6,17 +6,12 @@ const icons = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bo
 const doubleIcons = icons.concat(icons);
 
 
-// Timer
+// Timer function from https://github.com/ervaibhavkumar/Udacity-Memory-Game/blob/master/js/app.js
 var min = 0;
 var sec = 0;
 var hours = 0;
 var letsStop = 0;
-let numclicks = 0;
-
-
-// start timer
-
-function timerStart(){
+window.onload = function() {
     setInterval(function() {
         if (letsStop !== 1) {
             sec++;
@@ -34,17 +29,16 @@ function timerStart(){
             // {
             //     break;
             // } 
-            // console.log(min);
-            // console.log(sec);
+            console.log(min);
+            console.log(sec);
         }
 
     }, 1000);
-}
-/*
- * Display the cards on the page
+};
+ /* Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
+ *   - add each cards HTML to the page
  */
 
 
@@ -91,11 +85,6 @@ function click(card) {
     // Card click events
     card.addEventListener("click", function(){
 
-        // starts the timer only when a click is made.
-        numclicks++;
-        if (numclicks === 1){
-            timerStart();
-        }
         const currentCard = this;
         const previousCard = openedCards[0];
 
@@ -238,6 +227,7 @@ restart.addEventListener("click", function(){
     //Call "init"and "shuffle" function to create new cards and re-shuffle the array
     init();
     shuffle(doubleIcons);
+    location.reload();
     
 
 
@@ -249,7 +239,7 @@ restart.addEventListener("click", function(){
     starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>`;
-})
+});
 
 
  // Shuffle function from http://stackoverflow.com/a/2450976
