@@ -16,4 +16,11 @@ Click on this [LINK](https://ushie-sylvester.github.io/) to see the live version
 5. Else you will get 1 Star.
 6. You can also restart the game at any stage by clicking the restart button.
 
+## Dependencies
+1.  font-awesome: "^4.6.1"
+2.  mdbootstrap: "^4.3.2"
+3.  jquery: "^3.2.1"
+4.  sweetalert2:"^6.9.0"
+
+
 ####Have Fun!!!.

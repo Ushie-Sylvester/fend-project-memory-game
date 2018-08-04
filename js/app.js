@@ -1,10 +1,45 @@
 /*
  * Create a list that holds all of your cards
  */
-const icons = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", 
-"fa fa-anchor", "fa fa-anchor", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", 
-"fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb"];
+const icons = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube",
+"fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
+const doubleIcons = icons.concat(icons);
 
+
+// Timer
+var min = 0;
+var sec = 0;
+var hours = 0;
+var letsStop = 0;
+let numclicks = 0;
+
+
+// start timer
+
+function timerStart(){
+    setInterval(function() {
+        if (letsStop !== 1) {
+            sec++;
+            if (sec === 60) {
+                min++;
+                sec = 0;
+            }
+            if (min === 60) {
+                hours++;
+                min = 0;
+                sec = 0;
+            }
+            $('.timer').html(hours + ':' + min + ':' + sec);
+            // if(letsStop === 1)
+            // {
+            //     break;
+            // } 
+            // console.log(min);
+            // console.log(sec);
+        }
+
+    }, 1000);
+}
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -22,10 +57,10 @@ let matchedCards= [];
  * Initialize the Game
  */
 function init() {
-    for(let i = 0; i < icons.length; i++) {
+    for(let i = 0; i < doubleIcons.length; i++) {
         const card = document.createElement("li");
         card.classList.add("card");
-        card.innerHTML = `<i class="${icons[i]}"></i>`;
+        card.innerHTML = `<i class="${doubleIcons[i]}"></i>`;
         cardsContainer.appendChild(card);
 
         // Add click event to each card
@@ -35,7 +70,7 @@ function init() {
 }
 // Calling the Card function
 
-card= shuffle(icons);
+card= shuffle(doubleIcons);
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -56,6 +91,11 @@ function click(card) {
     // Card click events
     card.addEventListener("click", function(){
 
+        // starts the timer only when a click is made.
+        numclicks++;
+        if (numclicks === 1){
+            timerStart();
+        }
         const currentCard = this;
         const previousCard = openedCards[0];
 
@@ -117,7 +157,7 @@ function compare(currentCard,previousCard) {
  *  Check if Game is over and Display a congratulatory message
  */
 function gameOver() {
-    if (matchedCards.length === icons.length){
+    if (matchedCards.length === doubleIcons.length){
         
         //COngratulation message function from https://github.com/ervaibhavkumar/Udacity-Memory-Game/blob/master/js/app.js
         setTimeout(function() {
@@ -125,7 +165,7 @@ function gameOver() {
                 swal({
                     title: 'Congratulations',
                     type: 'success',
-                    text: 'You Won the Game!!!, With ' + moves + 'Moves and You got ' + stars + ' Star(s)', // Time taken is ' + hours + ' Hours ' + min + ' Minutes and ' + sec + ' Seconds',
+                    text: 'You Won the Game!!!, With ' + moves + 'Moves and You got ' + stars + ' Star(s) ,Time taken is ' + hours + ' Hours ' + min + ' Minutes and ' + sec + ' Seconds',
                     allowOutsideClick: false,
                     showCancelButton: true,
                     confirmButtonText: 'Play Again',
@@ -133,7 +173,7 @@ function gameOver() {
                     cancelButtonText: 'Close',
                     cancelButtonColor: '#FF0000'
                 }).then(function() {
-                    location.reload();
+                    // location.reload();
                 }, function(dismiss) {
                     console.log('Yes');
                 });
@@ -141,6 +181,10 @@ function gameOver() {
             });
         }, 300);
         
+        letsStop = 1;
+            $('.timer').hide();
+            $('.timer').html('0:0:0');
+            $('.timer').show();
     }
 };
 
@@ -189,13 +233,18 @@ const restart = document.querySelector(".restart");
 restart.addEventListener("click", function(){
     //Delete all Cards
     cardsContainer.innerHTML = "";
+    openedCards = [];
 
-    //Call "init" function to create new cards
+    //Call "init"and "shuffle" function to create new cards and re-shuffle the array
     init();
+    shuffle(doubleIcons);
+    
+
 
     // Reset Any related Variable
     matchedCards = [];
     moves = 0;
+    numclicks = 0;
     movesContainer.innerHTML = moves ;
     starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
     <li><i class="fa fa-star"></i></li>
