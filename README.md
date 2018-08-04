@@ -22,5 +22,4 @@ Click on this [LINK](https://ushie-sylvester.github.io/) to see the live version
 3.  jquery: "^3.2.1"
 4.  sweetalert2:"^6.9.0"
 
-
-####Have Fun!!!.
+## Have Fun!!!
