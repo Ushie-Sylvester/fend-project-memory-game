@@ -78,12 +78,12 @@ function compare(currentCard,previousCard) {
 
         gameOver();
 
+        
     } else{
         //wait 350ms then execute this
         setTimeout(function(){
             currentCard.classList.remove("open", "show","animated", "wobble", "disable");
             previousCard.classList.remove("open", "show","animated", "wobble", "disable");
-            
         }, 350);
 
         openedCards = [];
@@ -103,11 +103,11 @@ function gameOver() {
                 swal({
                     title: 'Congratulations',
                     type: 'success',
-                    text: 'You Won the Game!! . You Made ' + moves + 'Moves. You got ' + stars + ' Star(s)', // Time taken is ' + hours + ' Hours ' + min + ' Minutes and ' + sec + ' Seconds',
+                    text: 'You Won the Game!!!, With ' + moves + 'Moves and You got ' + stars + ' Star(s)', // Time taken is ' + hours + ' Hours ' + min + ' Minutes and ' + sec + ' Seconds',
                     allowOutsideClick: false,
                     showCancelButton: true,
                     confirmButtonText: 'Play Again',
-                    confirmButtonColor: '#0000FF',
+                    confirmButtonColor: '#2E3D49',
                     cancelButtonText: 'Close',
                     cancelButtonColor: '#FF0000'
                 }).then(function() {
@@ -145,13 +145,14 @@ function rating(){
     switch(moves) {
         case 18:
             starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
-            <li><i class="fa fa-star"></i></li>`;
+            <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star-o"></i></li>`;
             stars = 2;
 
         break;
 
         case 25:
-        starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>`;
+        starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li> 
+        <li><i class="fa fa-star-o"></i></li> <li><i class="fa fa-star-o"></i></li>`;
         stars = 1;
 
 
