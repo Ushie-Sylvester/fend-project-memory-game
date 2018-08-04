@@ -2,15 +2,15 @@
  * Create a list that holds all of your cards
  */
 const icons = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube",
-"fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
-const doubleIcons = icons.concat(icons);
+"fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"],
+doubleIcons = icons.concat(icons);
 
 
 // Timer function from https://github.com/ervaibhavkumar/Udacity-Memory-Game/blob/master/js/app.js
-var min = 0;
-var sec = 0;
-var hours = 0;
-var letsStop = 0;
+let min = 0,
+sec = 0,
+hours = 0,
+letsStop = 0;
 window.onload = function() {
     setInterval(function() {
         if (letsStop !== 1) {
@@ -154,7 +154,8 @@ function gameOver() {
                 swal({
                     title: 'Congratulations',
                     type: 'success',
-                    text: 'You Won the Game!!!, With ' + moves + 'Moves and You got ' + stars + ' Star(s) ,Time taken is ' + hours + ' Hours ' + min + ' Minutes and ' + sec + ' Seconds',
+                    text: `You Won the Game!!!, With ${moves} Moves and You got ${stars} Star(s) ,
+                    Time taken is ${hours} Hours ${min} Minutes and ${sec} Seconds`,
                     allowOutsideClick: false,
                     showCancelButton: true,
                     confirmButtonText: 'Play Again',
@@ -162,7 +163,7 @@ function gameOver() {
                     cancelButtonText: 'Close',
                     cancelButtonColor: '#FF0000'
                 }).then(function() {
-                    // location.reload();
+                    location.reload();
                 }, function(dismiss) {
                     console.log('Yes');
                 });
